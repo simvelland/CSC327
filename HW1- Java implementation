@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class RunLengthEncode {
+
+    public static String encode(String input) {
+        if (input.isEmpty()) {
+            return "";  // Return an empty string for an empty input
+        }
+
+        StringBuilder result = new StringBuilder();
+        char currentChar = input.charAt(0);
+        int count = 1;
+
+        for (int i = 1; i <= input.length(); i++) {
+            if (i < input.length() && input.charAt(i) == currentChar) {
+                count++;
+            } else {
+                if (count > 4) {
+                    result.append("/").append(formatCount(count)).append(currentChar);
+                } else {
+                    result.append(new String(new char[count]).replace('\0', currentChar));
+                }
+                if (i < input.length()) {
+                    currentChar = input.charAt(i);
+                    count = 1;
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    private static String formatCount(int count) {
+        return String.format("%02d", count);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string for encoding: ");
+        String input = scanner.nextLine();
+        scanner.close();
+
+        String encoded = RunLengthEncode.encode(input);
+
+        System.out.println("Original: " + input);
+        System.out.println("Encoded : " + encoded);
+    }
+}
