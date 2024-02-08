@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class ResourceAccess {
-
+public class AccessLevel {
     public static String accessRights(int[] rights, int minPermission) {
         StringBuilder result = new StringBuilder();
 
@@ -9,23 +8,20 @@ public class ResourceAccess {
             char access = (userPermission >= minPermission) ? 'A' : 'D';
             result.append(access);
         }
-
         return result.toString();
     }
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Enter the number of users: ");
         int numUsers = scanner.nextInt();
-
         int[] userRights = new int[numUsers];
+
         for (int i = 0; i < numUsers; i++) {
             System.out.print("Enter the rights for user " + (i + 1) + ": ");
             userRights[i] = scanner.nextInt();
         }
-
         System.out.print("Enter the minimum permission required: ");
         int minPermission = scanner.nextInt();
 
